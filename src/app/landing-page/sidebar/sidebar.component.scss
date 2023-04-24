@@ -1,0 +1,12 @@
+.content{
+    padding-left: 10px;
+
+    .faculty, .alumini, .departments{
+        font-weight: bold;
+        padding-top: 10px;
+    }
+
+    li:hover{
+        cursor: pointer;
+    }
+}

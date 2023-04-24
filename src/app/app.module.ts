@@ -10,7 +10,8 @@ import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'auth', pathMatch: 'full'
+    path: '', redirectTo: 'landing-page', pathMatch: 'full'
+    // path: '', redirectTo: 'auth', pathMatch: 'full'
   },
   {
     path: 'landing-page', 

@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'userAuth', pathMatch: 'full'
+    path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
     path: 'login', component: LoginComponent
