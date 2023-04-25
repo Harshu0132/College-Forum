@@ -1,1 +1,22 @@
-<p>ai-and-ds works!</p>
+<div class="content">
+    <div class="header text-center pt-3 pb-4 fw-bold">
+        Artificial Intelligence & Data Science
+    </div>
+    <div class="section mx-5">
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <input type="text" (keyup)="searchUserName()" placeholder="Search" class="form-control"
+                    [(ngModel)]="searchStr">
+            </div>
+            <div class="col add-question">
+                <button class="d-flex align-items-center btn btn-success btn-sm" (click)="addQuestion()">
+                    <i class="fa fa-plus" style="font-size:25px"></i>
+                    <span class="ms-2">Add Question</span>
+                </button>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>

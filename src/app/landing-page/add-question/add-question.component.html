@@ -1,0 +1,31 @@
+<div class="content">
+    <div class="header text-center pt-3 pb-4 fw-bold">
+        Add Question
+    </div>
+    <div class="section mx-5">
+        <form [formGroup]="addQuestionForm">
+            <div class="card p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <input type="text" formControlName="subject" class="form-control" placeholder="subject">
+                    </div>
+                    <div class="col add-question">
+                        <input type="text" formControlName="department" class="form-control" placeholder="department">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <textarea name="questionBody" class="form-control" placeholder="Question body"
+                        formControlName="questionBody" id="" cols="30" rows="10"></textarea>
+
+                </div>
+                <div class="mt-3 post">
+                    <button class="btn btn-success px-4 text-uppercase">Post</button>
+
+                </div>
+            </div>
+        </form>
+        <div>
+
+        </div>
+    </div>
+</div>

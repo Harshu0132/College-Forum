@@ -14,7 +14,9 @@ import { ElectronicsComponent } from './Departments/electronics/electronics.comp
 import { MechanicalComponent } from './Departments/mechanical/mechanical.component';
 import { CivilComponent } from './Departments/civil/civil.component';
 import { AiAndDsComponent } from './Departments/ai-and-ds/ai-and-ds.component';
-
+import { AluminiComponent } from './alumini/alumini.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddQuestionComponent } from './add-question/add-question.component';
 const routes: Routes = [
   {
     path: '', component: LandingPageComponent,
@@ -46,6 +48,12 @@ const routes: Routes = [
       {
         path: 'departments/ai&ds', component: AiAndDsComponent
       },
+      {
+        path: 'alumini', component: AluminiComponent
+      },
+      {
+        path: 'add-question', component: AddQuestionComponent
+      },
     ]
   },
 
@@ -66,10 +74,12 @@ const routes: Routes = [
     ElectronicsComponent,
     MechanicalComponent,
     CivilComponent,
-    AiAndDsComponent
+    AiAndDsComponent,
+    AluminiComponent,
+    AddQuestionComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule, FormsModule, ReactiveFormsModule,
     RouterModule.forChild(routes)
 
   ]

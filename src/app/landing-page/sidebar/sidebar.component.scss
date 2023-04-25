@@ -1,12 +1,39 @@
-.content{
-    padding-left: 10px;
+.card {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    height: 95.5vh;
+    margin-left: 10px;
 
-    .faculty, .alumini, .departments{
-        font-weight: bold;
-        padding-top: 10px;
-    }
+    .content {
+        padding-left: 10px;
 
-    li:hover{
-        cursor: pointer;
+        .faculty-content,
+        .department-content {
+            font-size: small;
+        }
+
+        .faculty,
+        .alumini,
+        .departments {
+            font-weight: bold;
+            padding-top: 10px;
+        }
+
+        li:hover,
+        .alumini:hover {
+            cursor: pointer;
+            color: #0f3f7f;
+        }
+
+        .administration:hover,
+        .college-faculty,
+        .cse:hover,
+        .mech:hover,
+        .electronics:hover,
+        .civil:hover,
+        .ai:hover {
+            cursor: pointer;
+            color: #0f3f7f;
+        }
+
     }
 }

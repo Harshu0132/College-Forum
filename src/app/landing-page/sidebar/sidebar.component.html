@@ -1,26 +1,51 @@
-<div class="content">
-    <div>
-        <label for="Faculty" class="faculty">Faculty</label>
-        <ul>
-            <li routerLink="/landing-page/faculty/administration">Administration</li>
-            <li routerLink="/landing-page/faculty/college-faculty">College Faculty</li>
-        </ul>
-    </div>
-    <div>
-        <label for="Alumini" class="alumini">Alumini</label>
-        <!-- <ul>
-            <li></li>
-          </ul> -->
-    </div>
-    <div>
-        <label for="Departments" class="departments">Departments</label>
-        <ul>
-            <li routerLink="/landing-page/departments/cse">Computer science & Engineering</li>
-            <li routerLink="/landing-page/departments/electronics">Electronics</li>
-            <li routerLink="/landing-page/departments/mechanical">Mechanical</li>
-            <li routerLink="/landing-page/departments/civil">Civil</li>
-            <li routerLink="/landing-page/departments/ai&ds">AI & DS</li>
-            <li disabled="true" routerLink="/landing-page/faculty/administration">Administration</li>
-        </ul>
+<div class="card">
+    <div class="content">
+        <div>
+            <label for="Faculty" class="faculty">Faculty</label>
+            <div class="faculty-content my-3">
+                <div routerLink="/landing-page/faculty/administration" class="administration">
+                    <span class="mx-1 ms-2"><i class='fas fa-chalkboard-teacher' style='font-size:12px'></i></span>
+                    <span class="mx-1 ms-2">Administration</span>
+                </div>
+                <div routerLink="/landing-page/faculty/college-faculty" class="mt-2 college-faculty">
+                    <span class="mx-1" style='padding-left: 5px;'><i class='fas fa-book-reader'
+                            style='font-size:12px'></i></span>
+                    <span class="mx-1" style='padding-left: 5px;'>College Faculty</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="Alumini" class="alumini" routerLink="/landing-page/alumini">Alumini</label>
+            <!-- <ul>
+                <li></li>
+              </ul> -->
+        </div>
+        <div>
+            <label for="Departments" class="departments">Departments</label>
+            <div class="department-content my-3">
+                <div routerLink="/landing-page/departments/cse" class="d-flex cse">
+                    <span class="mx-1 ms-2"><i class='fas fa-desktop' style='font-size:12px'></i> <span
+                            class="mx-1 ms-2">Computer Science & Engineering</span></span>
+
+                </div>
+                <div routerLink="/landing-page/departments/electronics" class="mt-2 electronics">
+                    <span class="mx-1 ms-2"><i class='fas fa-charging-station' style='font-size:12px'></i></span>
+                    <span class="mx-1 ms-2">Electronics</span>
+                </div>
+                <div routerLink="/landing-page/departments/mechanical" class="mt-2 mech">
+                    <span class="mx-1 ms-2"><i class="fa fa-gear" style="font-size:12px"></i></span>
+                    <span class="mx-1 ms-2">Mechanical</span>
+                </div>
+                <div routerLink="/landing-page/departments/civil" class="mt-2 civil">
+                    <span class="mx-1 ms-2"><i class='fas fa-hard-hat' style='font-size:12px'></i></span>
+                    <span class="mx-1 ms-2">Civil</span>
+                </div>
+                <div routerLink="/landing-page/departments/ai&ds" class="mt-2 ai">
+                    <span class="mx-1 ms-2"><i class='fas fa-atom' style='font-size:12px'></i></span>
+                    <span class="mx-1 ms-2">AI & DS</span>
+                </div>
+                <!-- <div disabled="true" routerLink="/landing-page/faculty/administration">Administration</div> -->
+            </div>
+        </div>
     </div>
 </div>

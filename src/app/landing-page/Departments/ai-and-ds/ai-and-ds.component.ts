@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ai-and-ds',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AiAndDsComponent implements OnInit {
 
-  constructor() { }
+  searchStr: String = ''
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  searchUserName(){
+
+  }
+
+  addQuestion(){
+    this.router.navigate(['/landing-page/add-question'],{
+      queryParams:{
+        department: "Computer Science & Engineering"
+      }
+    })
+  }
 }
