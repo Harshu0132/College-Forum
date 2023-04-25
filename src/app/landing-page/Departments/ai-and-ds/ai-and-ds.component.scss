@@ -10,6 +10,27 @@
             }
         }
 
+        .user-logo {
+            margin-left: 1px;
+
+            //border: 1px solid #ced4da;
+            .box {
+                width: 4rem;
+                height: 4rem;
+                // background-color: red;
+                border-radius: 10rem;
+            }
+
+            .comment:hover, .like:hover, .report:hover{
+                cursor: pointer;
+            }
+            .comment, .like, .report{
+                display: flex;
+                align-items: center;
+            }
+           
+        }
 
     }
+
 }

@@ -17,6 +17,9 @@ import { AiAndDsComponent } from './Departments/ai-and-ds/ai-and-ds.component';
 import { AluminiComponent } from './alumini/alumini.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddQuestionComponent } from './add-question/add-question.component';
+import { CommentRoomComponent } from './comment-room/comment-room.component';
+
+
 const routes: Routes = [
   {
     path: '', component: LandingPageComponent,
@@ -76,7 +79,8 @@ const routes: Routes = [
     CivilComponent,
     AiAndDsComponent,
     AluminiComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    CommentRoomComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,

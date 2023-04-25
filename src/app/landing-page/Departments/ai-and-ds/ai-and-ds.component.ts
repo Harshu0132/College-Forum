@@ -26,4 +26,8 @@ export class AiAndDsComponent implements OnInit {
       }
     })
   }
+
+  comment(){
+    this.router.navigate([])
+  }
 }
