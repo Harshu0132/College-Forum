@@ -1,67 +1,137 @@
-.container-fluid {
+// .container-fluid {
 
-    background: url("../../../assets/img files/6836923.jpg") no-repeat center/ cover;
+//     background: url("../../../assets/img files/6836923.jpg") no-repeat center/ cover;
 
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+//     width: 100%;
+//     height: 100vh;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
 
-    .card {
-        width: 32rem;
-        box-shadow: 5px 20px 50px #000;
+//     .card {
+//         width: 32rem;
+//         box-shadow: 5px 20px 50px #000;
 
-        .login {
-            // font-family: 'Great Vibes', cursive;
-            font-family: 'Great Vibes', cursive;
-            color: #0f3f7f;
-            font-size: 50px;
+//         .login {
+//             // font-family: 'Great Vibes', cursive;
+//             font-family: 'Great Vibes', cursive;
+//             color: #0f3f7f;
+//             font-size: 50px;
 
+//         }
+
+//         .height {
+//             height: 90vh;
+//         }
+
+//         .spacing {
+//             line-height: 13%;
+
+//             .register-text:hover {
+//                 color: red;
+//                 cursor: pointer;
+//             }
+
+//             .forget-pass-text:hover {
+//                 color: blue;
+//                 cursor: pointer;
+//             }
+//         }
+
+//         .regBtn {
+//             font-size: larger;
+//             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+//         }
+//     }
+// }
+
+// ::placeholder {
+//     text-align: center;
+//     font-size: 18px;
+// }
+
+// .font-font-cursive {
+//     // font-family: 'Open Sans', sans-serif;
+//     font-family: 'Allura', cursive;
+//     // font-family: 'Great Vibes', cursive;
+//     font-size: 20px;
+//     font-weight: bold;
+
+//     color: #092145;
+// }
+
+// .font-great-vibes {
+//     // font-family: 'Allura', cursive;
+//     font-family: 'Great Vibes', cursive;
+//     color: #0f3f7f;
+// }
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main {
+    .row {
+        width: 100%;
+        height: 100vh;
+
+        .left-part {
+            background-color: #f2d184;
+
+
+            .content {
+                position: relative;
+                top: 100px;
+                left: 60px;
+
+                .web-name {
+                    color: #a68238;
+                    font-family: 'Great Vibes', cursive;
+                    font-size: 30px;
+                    font-weight: 500;
+                }
+
+                .punch-line {
+                    color: #86621a;
+                    font-weight: 900;
+                    font-size: larger;
+                }
+
+            }
         }
 
-        .height {
-            height: 90vh;
-        }
+        .right-part {
+            background-color: #ffffff;
 
-        .spacing {
-            line-height: 13%;
+            label {
+                font-weight: bold;
 
-            .register-text:hover {
-                color: red;
+            }
+
+            input {
+                background-color: #f3f3f4;
+                font-size: 13px;
+                height: 32px;
+                padding: 10px;
+            }
+
+            .login-btn {
+                background-color: #ea4c89;
+                color: #ffffff;
+            }
+
+            .register-text,
+            .forget-pass-txt {
+                font-weight: bold;
                 cursor: pointer;
             }
 
-            .forget-pass-text:hover {
-                color: blue;
-                cursor: pointer;
+            .register-text:hover,
+            .forget-pass-txt:hover {
+                color: #86621a;
+
             }
         }
 
-        .regBtn {
-            font-size: larger;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        }
     }
-}
-
-::placeholder {
-    text-align: center;
-    font-size: 18px;
-}
-
-.font-font-cursive {
-    // font-family: 'Open Sans', sans-serif;
-    font-family: 'Allura', cursive;
-    // font-family: 'Great Vibes', cursive;
-    font-size: 20px;
-    font-weight: bold;
-
-    color: #092145;
-}
-
-.font-great-vibes {
-    // font-family: 'Allura', cursive;
-    font-family: 'Great Vibes', cursive;
-    color: #0f3f7f;
 }
