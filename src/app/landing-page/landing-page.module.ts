@@ -57,6 +57,9 @@ const routes: Routes = [
       {
         path: 'add-question', component: AddQuestionComponent
       },
+      {
+        path: 'comment-room', component: CommentRoomComponent
+      },
     ]
   },
 

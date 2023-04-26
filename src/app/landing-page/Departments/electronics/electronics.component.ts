@@ -16,7 +16,11 @@ export class ElectronicsComponent implements OnInit {
   }
 
   searchUserName(){
+    
+  }
 
+  comment(){
+    this.router.navigate(['/landing-page/comment-room'])
   }
 
   addQuestion(){

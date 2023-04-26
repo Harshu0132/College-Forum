@@ -16,9 +16,13 @@ export class ComputerScienceComponent implements OnInit {
   }
 
   searchUserName(){
-
+    
   }
 
+  comment(){
+    this.router.navigate(['/landing-page/comment-room'])
+  }
+  
   addQuestion(){
     this.router.navigate(['/landing-page/add-question'],{
       queryParams:{
@@ -26,5 +30,6 @@ export class ComputerScienceComponent implements OnInit {
       }
     })
   }
+
 
 }

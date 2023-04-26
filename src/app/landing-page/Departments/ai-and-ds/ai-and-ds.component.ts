@@ -15,19 +15,20 @@ export class AiAndDsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchUserName(){
+  searchUserName() {
 
   }
 
-  addQuestion(){
-    this.router.navigate(['/landing-page/add-question'],{
-      queryParams:{
+  comment() {
+    this.router.navigate(['/landing-page/comment-room'])
+  }
+
+  addQuestion() {
+    this.router.navigate(['/landing-page/add-question'], {
+      queryParams: {
         department: "Computer Science & Engineering"
       }
     })
   }
 
-  comment(){
-    this.router.navigate([])
-  }
 }
