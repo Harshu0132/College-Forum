@@ -18,6 +18,7 @@ import { AluminiComponent } from './alumini/alumini.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { CommentRoomComponent } from './comment-room/comment-room.component';
+import { AuthGuard } from '../auth.guard';
 
 
 const routes: Routes = [
@@ -28,37 +29,37 @@ const routes: Routes = [
         path: '', redirectTo: 'home'
       },
       {
-        path: 'home', component: HomeComponent
+        path: 'home', component: HomeComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'faculty/administration', component: AdministrationComponent
+        path: 'faculty/administration', component: AdministrationComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'faculty/college-faculty', component: CollegeFacultyComponent
+        path: 'faculty/college-faculty', component: CollegeFacultyComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'departments/cse', component: ComputerScienceComponent
+        path: 'departments/cse', component: ComputerScienceComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'departments/electronics', component: ElectronicsComponent
+        path: 'departments/electronics', component: ElectronicsComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'departments/mechanical', component: MechanicalComponent
+        path: 'departments/mechanical', component: MechanicalComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'departments/civil', component: CivilComponent
+        path: 'departments/civil', component: CivilComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'departments/ai&ds', component: AiAndDsComponent
+        path: 'departments/ai&ds', component: AiAndDsComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'alumini', component: AluminiComponent
+        path: 'alumini', component: AluminiComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'add-question', component: AddQuestionComponent
+        path: 'add-question', component: AddQuestionComponent, canActivate: [AuthGuard]
       },
       {
-        path: 'comment-room', component: CommentRoomComponent
+        path: 'comment-room', component: CommentRoomComponent, canActivate: [AuthGuard]
       },
     ]
   },

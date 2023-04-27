@@ -3,7 +3,7 @@
         Add Question
     </div>
     <div class="section mx-5">
-        <form [formGroup]="addQuestionForm">
+        <form [formGroup]="addQuestionForm" enctype="multipart/form-data">
             <div class="card p-5">
                 <div class="row align-items-center">
                     <div class="col-md-5">
@@ -18,9 +18,12 @@
                         formControlName="questionBody" id="" cols="30" rows="9"></textarea>
 
                 </div>
-                <div class="mt-3 post">
-                    <button class="btn btn-success px-4 text-uppercase">Post</button>
-
+                <div class="mt-3 post d-flex">
+                    <button class="btn btn-success px-4 btn-sm text-uppercase" (click)="addQuestion()">Post</button>
+                    <div class="bg-white mx-3">
+                        <input type="file" class="form-control" name="file"
+                            (input)="onSelectFile($event)">
+                    </div>
                 </div>
             </div>
         </form>

@@ -11,106 +11,108 @@
 
         </div>
         <div class="col-lg-7 right-part">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-10">
-                    <div class="row">
-                        <div class="col-lg-6 pt-3">
-                            <div class="my-2">
-                                <input type="text" class="form-control" placeholder="First Name">
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control" placeholder="Middle Name">
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control" placeholder="Last Name">
-                            </div>
-                            <div class="col-lg-4 my-2">
-                                <span class="text-danger">*</span> Contact no.
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control" placeholder="Contact no.">
-                            </div>
-
-                            <div class="my-2">
-                                <input type="text" class="form-control" placeholder="City">
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control" placeholder="PIN Code">
-                            </div>
-                            <div class="col-lg-4 my-2">
-                                <span class="text-danger">*</span> Designation
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-4 my-2">
-                                <span class="text-danger">*</span> Department
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-4 my-2">
-                                DOB
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-lg-4 my-2">
-                                Gender
-                            </div>
-                            <div class="my-2">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="imageData">
-                                <div class="box">
-
+            <form [formGroup]="userForm" enctype="multipart/form-data">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-lg-6 pt-3">
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="firstName"
+                                        placeholder="First Name">
+                                </div>
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="middleName"
+                                        placeholder="Middle Name">
+                                </div>
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="lastName"
+                                        placeholder="Last Name">
+                                </div>
+                                <div class="col-lg-4 my-2">
+                                    <span class="text-danger">*</span> Contact no.
+                                </div>
+                                <div class="my-2">
+                                    <input type="number" class="form-control" formControlName="contactNo"
+                                        placeholder="Contact no.">
                                 </div>
 
-                                <div class="bg-white pt-3 pb-2">
-                                    <input type="file" class="form-control" name="file" (input)="onSelectFile($event)">
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="city" placeholder="City">
+                                </div>
+                                <div class="my-2">
+                                    <input type="number" class="form-control" formControlName="pinCode"
+                                        placeholder="PIN Code">
+                                </div>
+                                <div class="col-lg-4 my-2">
+                                    <span class="text-danger">*</span> Designation
+                                </div>
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="designation">
+                                </div>
+                                <div class="col-lg-4 my-2">
+                                    <span class="text-danger">*</span> Department
+                                </div>
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="department">
+                                </div>
+                                <div class="col-lg-4 my-2">
+                                    DOB
+                                </div>
+                                <div class="my-2">
+                                    <input type="date" class="form-control" formControlName="dob">
+                                </div>
+                                <div class="col-lg-4 my-2">
+                                    Gender
+                                </div>
+                                <div class="my-2">
+                                    <input type="text" class="form-control" formControlName="gender">
                                 </div>
                             </div>
-                            <div class="col-lg-4 my-2" style="padding-top: 1px;">
-                                <span class="text-danger">*</span> Email
+                            <div class="col-lg-6">
+                                <div class="imageData">
+                                    <div class="box">
+                                        <img *ngIf="this.imageData" [src]="imageData" height="200">
+                                    </div>
 
-                            </div>
-                            <div class="col-lg-8 my-2">
-                                <input type="text" class="form-control">
-                            </div>
+                                    <div class="bg-white pt-3 pb-2">
+                                        <input type="file" class="form-control" name="file"
+                                            (input)="onSelectFile($event)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 my-2" style="padding-top: 1px;">
+                                    <span class="text-danger">*</span> Email
 
-                            <div class="my-2">
-                                <span class="text-danger">*</span> Username
-                            </div>
-                            <div class=" my-2">
-                                <input type="text" class="form-control">
+                                </div>
+                                <div class="col-lg-8 my-2">
+                                    <input type="email" class="form-control" formControlName="email">
+                                </div>
 
-                            </div>
-                            <div class="my-2">
-                                <span class="text-danger">*</span> Password
-                            </div>
-                            <div class=" my-2">
-                                <input type="text" class="form-control">
+                                <div class="my-2">
+                                    <span class="text-danger">*</span> Username
+                                </div>
+                                <div class=" my-2">
+                                    <input type="text" class="form-control" formControlName="username">
 
-                            </div>
-                            <div class="my-2">
-                                <span class="text-danger">*</span><span> Confirm Password</span>
-                            </div>
-                            <div class=" my-2">
-                                <input type="text" class="form-control">
+                                </div>
+                                <div class="my-2">
+                                    <span class="text-danger">*</span> Password
+                                </div>
+                                <div class=" my-2">
+                                    <input type="password" class="form-control" formControlName="password">
 
+                                </div>
                             </div>
+                            <span>
+                                <button class="btn btn-sign-up px-3 py-2" (click)="register()">Sign up</button>
+                            </span>
+
                         </div>
-                        <span>
-                            <button class="btn btn-sign-up px-3 py-2">Sign up</button>
-                        </span>
-
                     </div>
                 </div>
-                <!-- col-10 end -->
-            </div>
-
+                
+            </form>
         </div>
+
     </div>
 </div>
+                
