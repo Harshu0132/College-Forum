@@ -82,26 +82,23 @@ export class AddQuestionComponent implements OnInit {
     qf.append('subject', this.addQuestionForm.value.subject)
     qf.append('department', this.department)
     qf.append('questionBody', this.addQuestionForm.value.questionBody)
+    qf.append('file', this.image)
 
 
 
-    if (this.image) {
-      qf.append('file', this.image)
-    } else {
+
       // this.toastr.error('Plz.. select image', 'Error', {
       //   timeOut: 3000,
       // });
 
-      alert("Plzz... choose valid file")
-      return
-    }
+     
 
     this.questionService.addQuestion(qf, this.id).subscribe((success) => {
       console.log(success);
       // this.toastr.success('Cafe details added successfully, wait for admins approvement!!', 'Success', {
       //   timeOut: 2000,
       // });
-      alert("success")
+      // alert("success")
       if (success) {
         alert("question posted")
 

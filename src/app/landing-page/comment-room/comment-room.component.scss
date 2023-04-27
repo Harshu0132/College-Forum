@@ -5,12 +5,35 @@
 
         }
 
-        .input-reply{
-            width: 28rem;
+        .input-reply {
+            width: 24rem;
+        }
+
+        .box {
+            width: 4rem;
+            height: 4rem;
+            // background-color: red;
+            border-radius: 10rem;
+            // border: 1px solid black;
+
+            img {
+                width: 4rem;
+                height: 4rem;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 50%;
+            }
+
+        }
+
+        .date {
+            color: #6c757d;
+            font-size: small;
+            padding-left: 8px;
         }
     }
 }
 
-::placeholder{
+::placeholder {
     padding: 10px;
 }

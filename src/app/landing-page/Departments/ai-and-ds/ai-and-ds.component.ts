@@ -17,7 +17,8 @@ export class AiAndDsComponent implements OnInit {
 
   constructor(private router: Router,
     private aiAndDsService: AiAndDsService,
-    private domSanitizer: DomSanitizer,) {
+    private domSanitizer: DomSanitizer,
+  ) {
     this.getAllQuestionDetails()
   }
 
@@ -28,11 +29,15 @@ export class AiAndDsComponent implements OnInit {
 
   }
 
-  comment() {
-    this.router.navigate(['/landing-page/comment-room'])
+  comment(id: any) {
+    this.router.navigate(['/landing-page/comment-room'], {
+      queryParams: {
+        id
+      }
+    })
   }
 
- 
+
 
   getAllQuestionDetails() {
     let obj = {
@@ -40,13 +45,14 @@ export class AiAndDsComponent implements OnInit {
     }
     this.aiAndDsService.getAllAiAndDsDetails(obj).subscribe(success => {
       // console.log(success);
-      
-      
+
+
       this.arr = success.map((s: any) => {
         console.log(s['data'].user);
-        const imageurl = this.imageConverter(s['data'].attachment.data);
+                const imageurl = this.imageConverter(s['data']?.attachment?.data);
+
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        return { imageUrl: imageurl,profileUrl: profileUrl, userName:s['data'].user.userName,  id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        return { imageUrl: imageurl, profileUrl: profileUrl, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
       })
 
       // console.log(this.arr);

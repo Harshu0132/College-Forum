@@ -4,23 +4,19 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionService {
+export class CommentsService {
 
   constructor(private http: HttpClient) {
 
   }
 
-  addQuestion(obj: any, id: number) {
-    let url = `http://localhost:3000/api/addQuestion/${id}`
+  addComment(obj: any, id: number) {
+    let url = `http://localhost:3000/api/addComment/${id}`
     return this.http.post<any>(url, obj);
   }
 
-  getDetailsByQuestionId(id: number){
-    let url = `http://localhost:3000/api/getDetailsByQuestionId/${id}`
+  getAllCommentByQuestionId(id: number) {
+    let url = `http://localhost:3000/api/getAllCommentsByQuestionId/${id}`
     return this.http.get<any>(url);
-
   }
-
 }
-
-

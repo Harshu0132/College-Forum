@@ -28,8 +28,12 @@ export class ElectronicsComponent implements OnInit {
 
   }
 
-  comment() {
-    this.router.navigate(['/landing-page/comment-room'])
+  comment(id: any) {
+    this.router.navigate(['/landing-page/comment-room'], {
+      queryParams: {
+        id
+      }
+    })
   }
 
  
@@ -44,7 +48,8 @@ export class ElectronicsComponent implements OnInit {
       
       this.arr = success.map((s: any) => {
         console.log(s['data'].user);
-        const imageurl = this.imageConverter(s['data'].attachment.data);
+                const imageurl = this.imageConverter(s['data']?.attachment?.data);
+
         const profileUrl = this.imageConverter(s['data'].user.file.data);
         return { imageUrl: imageurl,profileUrl: profileUrl, userName:s['data'].user.userName,  id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
       })

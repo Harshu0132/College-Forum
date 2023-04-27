@@ -7,18 +7,17 @@
             <div class="row user-logo rounded-1 mt-4 mb-2 ">
                 <div class="col-lg-1 py-3">
                     <div class="box">
-                        <img src="../../../../assets/img files/girl.png" class="img-fluid" alt="">
+                        <img [src]="data?.profileUrl" class="img-fluid" alt="">
                     </div>
                 </div>
-                <div class="col-lg-10 pt-4">
-                    <p class="fw-bold p-0 m-0">HM DAO <br></p>
-                    <p>Regarding XYZ</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem voluptatem ipsa quam tempore vero
-                        alias perferendis facere soluta accusantium distinctio. ?</p>
+                <div class="col-lg-10 pt-4" [formGroup]="commentForm">
+                    <p class="fw-bold p-0 m-0">{{data?.userName}} <br></p>
+                    <p>{{data?.subject}}</p>
+                    <p>{{data?.questionBody}}</p>
 
                     <div class="row">
                         <div class="col-7">
-                            <img src="../../../../assets/img files/4814526.jpg" class="img-fluid rounded-2 mb-3" alt="">
+                            <img [src]="data?.imageUrl" class="img-fluid rounded-2 mb-3" alt="">
                             <hr>
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <div class="like">
@@ -35,16 +34,35 @@
                             </div>
                             <hr>
                             <div class="d-flex align-items-center justify-content-between mb-3">
-                              <div class="input-reply">
-                                <input type="text" class="form-control rounded-5" placeholder="Type your reply">
-                              </div>
-                              <div>
-                                <button class="btn btn btn-success reply rounded-5 px-3">Reply</button>
-                              </div>
+                                <div class="input-reply">
+                                    <input type="text" class="form-control rounded-5" formControlName="description"
+                                        placeholder="Type your reply">
+                                </div>
+                                <div>
+                                    <button class="btn btn btn-success reply rounded-5 px-3"
+                                        (click)="addComment()">Reply</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            <!-- comment replies -->
+            <div class="replies">
+                <div class="row user-logo rounded-1 mt-4 mb-2 " *ngFor="let c of arr; let i=index">
+                    <div class="col-lg-1 py-3">
+                        <div class="box">
+                            <img [src]="c.profileUrl" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-10 pt-4">
+                        <p class="fw-bold p-0 m-0">{{c.userName}} <span class="fw-bold date">{{c.time}} | {{c.date}}</span><br></p>
+                        <p>{{c.description}} </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

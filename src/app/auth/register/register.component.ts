@@ -114,12 +114,12 @@ export class RegisterComponent implements OnInit {
       let reader = new FileReader()
       reader.onload = () => {
         this.imageData = reader.result
-        console.log(this.imageData);
+        // console.log(this.imageData);
         
       }
       reader.readAsDataURL(this.image);
 
-      console.log(this.image);
+      // console.log(this.image);
     
     }
 

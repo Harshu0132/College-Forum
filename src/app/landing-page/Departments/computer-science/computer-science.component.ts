@@ -29,23 +29,27 @@ export class ComputerScienceComponent implements OnInit {
 
   }
 
-  comment() {
-    this.router.navigate(['/landing-page/comment-room'])
+  comment(id: any) {
+    this.router.navigate(['/landing-page/comment-room'], {
+      queryParams: {
+        id
+      }
+    })
   }
 
  
 
   getAllQuestionDetails() {
     let obj = {
-      department: "Artificial Intelligence & Data Science"
+      department: "Computer Science & Engineering"
     }
     this.cseService.getAllCseDetails(obj).subscribe(success => {
       // console.log(success);
       
       
       this.arr = success.map((s: any) => {
-        console.log(s['data'].user);
-        const imageurl = this.imageConverter(s['data'].attachment.data);
+        console.log(s['data']);
+        const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
         return { imageUrl: imageurl,profileUrl: profileUrl, userName:s['data'].user.userName,  id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
       })
@@ -69,7 +73,7 @@ export class ComputerScienceComponent implements OnInit {
   addQuestion(){
     this.router.navigate(['/landing-page/add-question'],{
       queryParams:{
-        department: "Artificial Intelligence & Data Science"
+        department: "Computer Science & Engineering"
       }
     })
   }
