@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CommentsService } from 'src/app/services/comments.service';
+import { LikesService } from 'src/app/services/likes.service';
 
 @Component({
   selector: 'app-comment-room',
@@ -18,14 +19,14 @@ export class CommentRoomComponent implements OnInit {
   userId: any
   arr: any
   commentCounter: number = 0
-
+  department: string = ''
   constructor(private questionService: QuestionService,
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     private authenticationService: AuthenticationService,
-    private commentsService: CommentsService
+    private commentsService: CommentsService,
+    private likesService: LikesService
   ) {
-
 
   }
 
@@ -38,14 +39,55 @@ export class CommentRoomComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getUserId()
+
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.questionId = params.id
+      this.department = params.department
       this.getDetailsBYQuestionId()
-      this.getUserId()
       this.getAllComments()
-
     })
+
   }
+
+
+  isLiked = false;
+
+  onLikeClick() {
+    this.isLiked = !this.isLiked;
+
+    if (this.isLiked) {
+      console.log(this.isLiked);
+
+      let obj = {
+        like: this.isLiked,
+        userId: this.userId
+      }
+      this.questionService.likeCounter(this.questionId).subscribe((success) => {
+        console.log(success);
+        this.getDetailsBYQuestionId()
+        this.likesService.isLike(obj, this.questionId).subscribe((success) => {
+          console.log(success);
+        })
+      })
+
+    } else {
+      console.log(this.isLiked);
+
+      let obj = {
+        like: this.isLiked,
+        userId: this.userId
+      }
+      this.questionService.unLikeCounter(this.questionId).subscribe((success) => {
+        console.log(success);
+        this.getDetailsBYQuestionId()
+        this.likesService.isLike(obj, this.questionId).subscribe((success) => {
+          console.log(success);
+        })
+      })
+    }
+  }
+
 
   imageConverter(img: any) {
     let TYPED_ARRAY = new Uint8Array(img);
@@ -67,7 +109,7 @@ export class CommentRoomComponent implements OnInit {
     this.commentsService.addComment(this.commentForm.value, this.questionId).subscribe((success) => {
       // console.log(success);
       if (success) {
-        this.questionService.commentCounter(this.questionId).subscribe((success)=>{
+        this.questionService.commentCounter(this.questionId).subscribe((success) => {
           // console.log(success);
         })
       }
@@ -78,15 +120,13 @@ export class CommentRoomComponent implements OnInit {
       this.commentForm.reset()
 
     })
-
-
-
   }
 
 
   getUserId() {
     this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
       this.userId = success.id
+      this.getAllLikeStatusUserId()
     })
   }
 
@@ -107,10 +147,7 @@ export class CommentRoomComponent implements OnInit {
           date: date
         }
       })
-
       // console.log(this.arr);
-
-
     })
   }
 
@@ -124,23 +161,23 @@ export class CommentRoomComponent implements OnInit {
     return istTimeString
   }
 
-  dateFormatter(str: any){
+  dateFormatter(str: any) {
     const dateStr = str;
     const date = new Date(dateStr);
-    
+
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear().toString();
-    
+
     const formattedDate = `${day}-${month}-${year}`;
     return formattedDate
   }
 
-  getDetailsBYQuestionId(){
+  getDetailsBYQuestionId() {
     this.questionService.getDetailsByQuestionId(this.questionId).subscribe((success) => {
       const profileUrl = this.imageConverter(success?.data?.user?.file?.data);
       const imageUrl = this.imageConverter(success?.data?.attachment?.data);
-      if(success.data.commentCounter){
+      if (success.data.commentCounter) {
         this.commentCounter = success.data.commentCounter
       }
 
@@ -153,9 +190,16 @@ export class CommentRoomComponent implements OnInit {
         subject: success.data.subject,
         userName: success.data.user.userName,
         commentCounter: success.data.commentCounter,
+        likeCounter: success.data.likeCounter,
       }
-      // console.log(this.data);
     })
   }
- 
+
+  getAllLikeStatusUserId() {
+    this.likesService.getAllLikeStatusUserId(this.userId).subscribe((data) => {
+      this.isLiked = data?.like
+    })
+  }
+
+  
 }

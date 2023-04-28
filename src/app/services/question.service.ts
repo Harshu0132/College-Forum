@@ -25,6 +25,19 @@ export class QuestionService {
     let url = `http://localhost:3000/api/commentCounter/${id}`
     return this.http.get<any>(url);
   }
+  likeCounter(id: number){
+    let url = `http://localhost:3000/api/likeCounter/${id}`
+    return this.http.get<any>(url);
+  }
+  unLikeCounter(id: number){
+    let url = `http://localhost:3000/api/unLikeCounter/${id}`
+    return this.http.get<any>(url);
+  }
+
+  getAllLikesByQuestionId(id: number) {
+    let url = `http://localhost:3000/api/getAllLikesByQuestionId/${id}`
+    return this.http.get<any>(url);
+  }
 
 }
 

@@ -12,8 +12,8 @@ export class CseService {
   }
 
 
-  getAllCseDetails(obj: any){
-    let url = `http://localhost:3000/api/getAllCseQuestionDetails`
+  getAllCseDetails(obj: any, id: number){
+    let url = `http://localhost:3000/api/getAllCseQuestionDetails/${id}`
     return this.http.post<any>(url,obj);
   }
 

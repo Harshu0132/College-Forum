@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CseService } from 'src/app/services/departments/cse.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class ComputerScienceComponent implements OnInit {
 
   constructor(private router: Router,
     private cseService: CseService,
-    private domSanitizer: DomSanitizer,) {
-    this.getAllQuestionDetails()
+    private domSanitizer: DomSanitizer,
+    private authenticationService: AuthenticationService) {
+    this.getUserId()
   }
 
   ngOnInit(): void {
@@ -32,7 +34,8 @@ export class ComputerScienceComponent implements OnInit {
   comment(id: any) {
     this.router.navigate(['/landing-page/comment-room'], {
       queryParams: {
-        id
+        id: id,
+        department: "Computer Science & Engineering"
       }
     })
   }
@@ -41,16 +44,16 @@ export class ComputerScienceComponent implements OnInit {
 
   getAllQuestionDetails() {
     let obj = {
-      department: "Artificial Intelligence & Data Science"
+      department: "Computer Science & Engineering"
     }
-    this.cseService.getAllCseDetails(obj).subscribe(success => {
+    this.cseService.getAllCseDetails(obj, this.userId).subscribe(success => {
       // console.log(success);
 
 
       this.arr = success.map((s: any) => {
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
         return data;
       })
 
@@ -80,4 +83,21 @@ export class ComputerScienceComponent implements OnInit {
   }
 
 
+  isLiked = false;
+
+  onLikeClick() {
+    this.isLiked = !this.isLiked;
+
+    if (this.isLiked) {
+      console.log(this.isLiked);
+    }
+  }
+  userId: any
+  getUserId() {
+    this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
+      this.userId = success.id
+      this.getAllQuestionDetails()
+
+    })
+  }
 }

@@ -32,7 +32,8 @@ export class MechanicalComponent implements OnInit {
   comment(id: any) {
     this.router.navigate(['/landing-page/comment-room'], {
       queryParams: {
-        id
+        id: id,
+        department: "Mechanical"
       }
     })
   }
@@ -50,7 +51,7 @@ export class MechanicalComponent implements OnInit {
       this.arr = success.map((s: any) => {
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        const data = { imageUrl: imageurl,likeCounter: s['data'].likeCounter, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
         return data;
       })
 
