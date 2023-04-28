@@ -21,6 +21,11 @@ export class QuestionService {
 
   }
 
+  commentCounter(id: number){
+    let url = `http://localhost:3000/api/commentCounter/${id}`
+    return this.http.get<any>(url);
+  }
+
 }
 
 

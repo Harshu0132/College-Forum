@@ -37,22 +37,23 @@ export class ComputerScienceComponent implements OnInit {
     })
   }
 
- 
+
 
   getAllQuestionDetails() {
     let obj = {
-      department: "Computer Science & Engineering"
+      department: "Artificial Intelligence & Data Science"
     }
     this.cseService.getAllCseDetails(obj).subscribe(success => {
       // console.log(success);
-      
-      
+
+
       this.arr = success.map((s: any) => {
-        console.log(s['data']);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        return { imageUrl: imageurl,profileUrl: profileUrl, userName:s['data'].user.userName,  id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        return data;
       })
+
 
       // console.log(this.arr);
 
@@ -69,10 +70,10 @@ export class ComputerScienceComponent implements OnInit {
     const imageurl = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + base64String);
     return imageurl;
   }
-  
-  addQuestion(){
-    this.router.navigate(['/landing-page/add-question'],{
-      queryParams:{
+
+  addQuestion() {
+    this.router.navigate(['/landing-page/add-question'], {
+      queryParams: {
         department: "Computer Science & Engineering"
       }
     })

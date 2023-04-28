@@ -37,7 +37,7 @@ export class MechanicalComponent implements OnInit {
     })
   }
 
- 
+
 
   getAllQuestionDetails() {
     let obj = {
@@ -45,14 +45,13 @@ export class MechanicalComponent implements OnInit {
     }
     this.mechanicalService.getAllMechDetails(obj).subscribe(success => {
       // console.log(success);
-      
-      
-      this.arr = success.map((s: any) => {
-        console.log(s['data'].user);
-                const imageurl = this.imageConverter(s['data']?.attachment?.data);
 
+
+      this.arr = success.map((s: any) => {
+        const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        return { imageUrl: imageurl,profileUrl: profileUrl, userName:s['data'].user.userName,  id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        return data;
       })
 
       // console.log(this.arr);
@@ -71,9 +70,9 @@ export class MechanicalComponent implements OnInit {
     return imageurl;
   }
 
-  addQuestion(){
-    this.router.navigate(['/landing-page/add-question'],{
-      queryParams:{
+  addQuestion() {
+    this.router.navigate(['/landing-page/add-question'], {
+      queryParams: {
         department: "Mechanical"
       }
     })

@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="comment">
                                     <i class='far fa-comment' style='font-size:24px'></i><span
-                                        class="ps-2 pe-5">0</span>
+                                        class="ps-2 pe-5">{{commentCounter}}</span>
                                 </div>
                                 <div class="report">
                                     <i class="fa fa-file-archive-o" style="font-size:24px"></i><span
@@ -40,7 +40,7 @@
                                 </div>
                                 <div>
                                     <button class="btn btn btn-success reply rounded-5 px-3"
-                                        (click)="addComment()">Reply</button>
+                                        (click)="addComment()" [disabled]="this.commentForm.value.description ? false : true">Reply</button>
                                 </div>
                             </div>
                         </div>

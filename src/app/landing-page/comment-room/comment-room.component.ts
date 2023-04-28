@@ -17,6 +17,7 @@ export class CommentRoomComponent implements OnInit {
   questionId: any
   userId: any
   arr: any
+  commentCounter: number = 0
 
   constructor(private questionService: QuestionService,
     private activatedRoute: ActivatedRoute,
@@ -39,22 +40,7 @@ export class CommentRoomComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.questionId = params.id
-      this.questionService.getDetailsByQuestionId(this.questionId).subscribe((success) => {
-        const profileUrl = this.imageConverter(success?.data?.user?.file?.data);
-        const imageUrl = this.imageConverter(success?.data?.attachment?.data);
-
-
-        this.data = {
-          id: success.data.id,
-          profileUrl: profileUrl,
-          imageUrl: imageUrl,
-          department: success.data.department,
-          questionBody: success.data.questionBody,
-          subject: success.data.subject,
-          userName: success.data.user.userName
-        }
-        console.log(this.data);
-      })
+      this.getDetailsBYQuestionId()
       this.getUserId()
       this.getAllComments()
 
@@ -79,11 +65,18 @@ export class CommentRoomComponent implements OnInit {
     this.commentForm.patchValue(obj);
 
     this.commentsService.addComment(this.commentForm.value, this.questionId).subscribe((success) => {
-      console.log(success);
+      // console.log(success);
       if (success) {
-        // alert("comment add successfully")
+        this.questionService.commentCounter(this.questionId).subscribe((success)=>{
+          // console.log(success);
+        })
       }
       this.getAllComments()
+      this.getDetailsBYQuestionId()
+      this.getDetailsBYQuestionId()
+
+      this.commentForm.reset()
+
     })
 
 
@@ -115,7 +108,7 @@ export class CommentRoomComponent implements OnInit {
         }
       })
 
-      console.log(this.arr);
+      // console.log(this.arr);
 
 
     })
@@ -141,8 +134,28 @@ export class CommentRoomComponent implements OnInit {
     
     const formattedDate = `${day}-${month}-${year}`;
     return formattedDate
-    
-    
+  }
+
+  getDetailsBYQuestionId(){
+    this.questionService.getDetailsByQuestionId(this.questionId).subscribe((success) => {
+      const profileUrl = this.imageConverter(success?.data?.user?.file?.data);
+      const imageUrl = this.imageConverter(success?.data?.attachment?.data);
+      if(success.data.commentCounter){
+        this.commentCounter = success.data.commentCounter
+      }
+
+      this.data = {
+        id: success.data.id,
+        profileUrl: profileUrl,
+        imageUrl: imageUrl,
+        department: success.data.department,
+        questionBody: success.data.questionBody,
+        subject: success.data.subject,
+        userName: success.data.user.userName,
+        commentCounter: success.data.commentCounter,
+      }
+      // console.log(this.data);
+    })
   }
  
 }

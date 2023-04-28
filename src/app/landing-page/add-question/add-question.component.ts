@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { constant } from 'src/assets/constant'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -13,7 +13,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class AddQuestionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private router: Router) {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.department = params.department
 
@@ -100,9 +101,22 @@ export class AddQuestionComponent implements OnInit {
       // });
       // alert("success")
       if (success) {
-        alert("question posted")
+        if(this.department == "Computer Science & Engineering"){
+          this.router.navigate(['/landing-page/departments/cse'])
+        }
+        if(this.department == "Electronics"){
+          this.router.navigate(['/landing-page/departments/electronics'])
+        }
+        if(this.department == "Mechanical"){
+          this.router.navigate(['/landing-page/departments/mechanical'])
+        }
+        if(this.department == "Civil"){
+          this.router.navigate(['/landing-page/departments/civil'])
+        }
+        if(this.department == "Artificial Intelligence & Data Science"){
+          this.router.navigate(['/landing-page/departments/ai&ds'])
+        }
 
-        // this.router.navigate(['/landing-page/home'])
       }
     }, (err) => {
       console.log("err", err);
