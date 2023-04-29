@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MechanicalService } from 'src/app/services/departments/mechanical.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -18,8 +19,23 @@ export class MechanicalComponent implements OnInit {
 
   constructor(private router: Router,
     private mechanicalService: MechanicalService,
-    private domSanitizer: DomSanitizer,) {
+    private domSanitizer: DomSanitizer,
+    private authenticationService: AuthenticationService
+    ) {
     this.getAllQuestionDetails()
+    this.getUserId()
+
+  }
+
+  userId: any
+  getUserId() {
+    this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
+      this.userId = success.id
+      console.log(this.userId);
+
+      this.getAllQuestionDetails()
+
+    })
   }
 
   ngOnInit(): void {
@@ -49,9 +65,20 @@ export class MechanicalComponent implements OnInit {
 
 
       this.arr = success.map((s: any) => {
+
+        const like = s['data'].likes.reduce((acc: any, l: any) => {
+          if (l.userId === this.userId) {
+            return l.like;
+          }
+          return acc;
+        }, false);
+
+        console.log(like);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        const data = { imageUrl: imageurl,likeCounter: s['data'].likeCounter, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, isLiked: like}
+        console.log(data);
+
         return data;
       })
 
@@ -77,5 +104,15 @@ export class MechanicalComponent implements OnInit {
         department: "Mechanical"
       }
     })
+  }
+
+  isLiked = false;
+
+  onLikeClick() {
+    this.isLiked = !this.isLiked;
+
+    if (this.isLiked) {
+      console.log(this.isLiked);
+    }
   }
 }

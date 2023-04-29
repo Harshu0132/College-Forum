@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AiAndDsService } from 'src/app/services/departments/ai-and-ds.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-ai-and-ds',
@@ -18,13 +19,17 @@ export class AiAndDsComponent implements OnInit {
   constructor(private router: Router,
     private aiAndDsService: AiAndDsService,
     private domSanitizer: DomSanitizer,
+    private authenticationService: AuthenticationService
+
   ) {
     this.getAllQuestionDetails()
+    this.getUserId()
+
   }
 
   ngOnInit(): void {
 
-    
+
   }
 
   searchUserName() {
@@ -49,15 +54,23 @@ export class AiAndDsComponent implements OnInit {
     this.aiAndDsService.getAllAiAndDsDetails(obj).subscribe(success => {
       // console.log(success);
 
-
       this.arr = success.map((s: any) => {
+
+        const like = s['data'].likes.reduce((acc: any, l: any) => {
+          if (l.userId === this.userId) {
+            return l.like;
+          }
+          return acc;
+        }, false);
+
+        console.log(like);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
+        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, isLiked: like }
+        console.log(data);
 
-        const data = { imageUrl: imageurl,likeCounter: s['data'].likeCounter,  profileUrl: profileUrl, commentCounter: s['data'].commentCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
         return data;
       })
-
 
       // console.log(this.arr);
 
@@ -80,6 +93,27 @@ export class AiAndDsComponent implements OnInit {
       queryParams: {
         department: "Artificial Intelligence & Data Science"
       }
+    })
+  }
+
+  isLiked = false;
+
+  onLikeClick() {
+    this.isLiked = !this.isLiked;
+
+    if (this.isLiked) {
+      console.log(this.isLiked);
+    }
+  }
+
+  userId: any
+  getUserId() {
+    this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
+      this.userId = success.id
+      console.log(this.userId);
+
+      this.getAllQuestionDetails()
+
     })
   }
 

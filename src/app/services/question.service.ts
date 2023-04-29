@@ -15,23 +15,19 @@ export class QuestionService {
     return this.http.post<any>(url, obj);
   }
 
-  getDetailsByQuestionId(id: number){
+  getDetailsByQuestionId(id: number) {
     let url = `http://localhost:3000/api/getDetailsByQuestionId/${id}`
     return this.http.get<any>(url);
 
   }
 
-  commentCounter(id: number){
+  commentCounter(id: number) {
     let url = `http://localhost:3000/api/commentCounter/${id}`
     return this.http.get<any>(url);
   }
-  likeCounter(id: number){
+  likeCounter(like: any, id: number) {
     let url = `http://localhost:3000/api/likeCounter/${id}`
-    return this.http.get<any>(url);
-  }
-  unLikeCounter(id: number){
-    let url = `http://localhost:3000/api/unLikeCounter/${id}`
-    return this.http.get<any>(url);
+    return this.http.post<any>(url,like);
   }
 
   getAllLikesByQuestionId(id: number) {

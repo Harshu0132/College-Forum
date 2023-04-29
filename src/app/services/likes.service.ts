@@ -15,10 +15,10 @@ export class LikesService {
     return this.http.post<any>(url, obj);
   }
 
-  getAllLikeStatusUserId(id: number) {
-    let url = `http://localhost:3000/api/getAllLikeStatusUserId/${id}`
-    return this.http.get<any>(url);
+  getLikeStatusUserId(userId: any, id: number) {
+    let url = `http://localhost:3000/api/getLikeStatusUserId/${id}`
+    return this.http.post<any>(url,userId);
   }
 
-  
+
 }

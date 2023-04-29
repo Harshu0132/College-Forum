@@ -20,7 +20,8 @@ export class ComputerScienceComponent implements OnInit {
   constructor(private router: Router,
     private cseService: CseService,
     private domSanitizer: DomSanitizer,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService
+  ) {
     this.getUserId()
   }
 
@@ -51,9 +52,20 @@ export class ComputerScienceComponent implements OnInit {
 
 
       this.arr = success.map((s: any) => {
+
+        const like = s['data'].likes.reduce((acc: any, l: any) => {
+          if (l.userId === this.userId) {
+            return l.like;
+          }
+          return acc;
+        }, false);
+
+        console.log(like);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
         const profileUrl = this.imageConverter(s['data'].user.file.data);
-        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, price: s['data'].price }
+        const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, isLiked: like }
+        console.log(data);
+
         return data;
       })
 
@@ -96,8 +108,12 @@ export class ComputerScienceComponent implements OnInit {
   getUserId() {
     this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
       this.userId = success.id
+      console.log(this.userId);
+
       this.getAllQuestionDetails()
 
     })
   }
+
+
 }

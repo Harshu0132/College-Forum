@@ -20,6 +20,8 @@ export class CommentRoomComponent implements OnInit {
   arr: any
   commentCounter: number = 0
   department: string = ''
+  isLiked = false;
+
   constructor(private questionService: QuestionService,
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
@@ -39,9 +41,8 @@ export class CommentRoomComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUserId()
-
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      this.getUserId()
       this.questionId = params.id
       this.department = params.department
       this.getDetailsBYQuestionId()
@@ -51,41 +52,21 @@ export class CommentRoomComponent implements OnInit {
   }
 
 
-  isLiked = false;
 
   onLikeClick() {
     this.isLiked = !this.isLiked;
-
-    if (this.isLiked) {
-      console.log(this.isLiked);
-
-      let obj = {
-        like: this.isLiked,
-        userId: this.userId
-      }
-      this.questionService.likeCounter(this.questionId).subscribe((success) => {
-        console.log(success);
-        this.getDetailsBYQuestionId()
-        this.likesService.isLike(obj, this.questionId).subscribe((success) => {
-          console.log(success);
-        })
-      })
-
-    } else {
-      console.log(this.isLiked);
-
-      let obj = {
-        like: this.isLiked,
-        userId: this.userId
-      }
-      this.questionService.unLikeCounter(this.questionId).subscribe((success) => {
-        console.log(success);
-        this.getDetailsBYQuestionId()
-        this.likesService.isLike(obj, this.questionId).subscribe((success) => {
-          console.log(success);
-        })
-      })
+    let obj = {
+      like: this.isLiked,
+      userId: this.userId
     }
+    this.questionService.likeCounter({ like: this.isLiked }, this.questionId).subscribe((success) => {
+      console.log(success);
+      this.getDetailsBYQuestionId()
+      this.likesService.isLike(obj, this.questionId).subscribe((success) => {
+        console.log(success);
+      })
+    })
+
   }
 
 
@@ -126,7 +107,7 @@ export class CommentRoomComponent implements OnInit {
   getUserId() {
     this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
       this.userId = success.id
-      this.getAllLikeStatusUserId()
+      this.getLikeStatusByUserId()
     })
   }
 
@@ -195,11 +176,13 @@ export class CommentRoomComponent implements OnInit {
     })
   }
 
-  getAllLikeStatusUserId() {
-    this.likesService.getAllLikeStatusUserId(this.userId).subscribe((data) => {
-      this.isLiked = data?.like
+  getLikeStatusByUserId() {
+    this.likesService.getLikeStatusUserId({ userId: this.userId }, this.questionId).subscribe((data) => {
+      this.isLiked = data.like;
+      console.log(this.isLiked);
+      // this.isLiked = data?.like
     })
   }
 
-  
+
 }
