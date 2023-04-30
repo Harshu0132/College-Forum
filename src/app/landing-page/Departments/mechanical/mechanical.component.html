@@ -33,7 +33,7 @@
                             <img [src]="q.imageUrl" class="img-fluid rounded-2 mb-3" alt="">
                             <hr>
                             <div class="d-flex align-items-center justify-content-between mb-3">
-                              <div class="like" (click)="comment(q.id)">
+                                <div class="like" (click)="comment(q.id)">
                                     <button class="like-button" (click)="onLikeClick()"
                                         [style]=" q.isLiked == true ? 'background-color: #f7e0eb;': 'background-color: white;'">
                                         <svg viewBox="0 0 24 24" aria-hidden="true"
@@ -51,7 +51,7 @@
                                     <i class='far fa-comment' style='font-size:24px'></i><span
                                         class="ps-2 pe-5">{{q.commentCounter}}</span>
                                 </div>
-                                <div class="report">
+                                <div class="report" (click)="comment(q.id)">
                                     <i class="fa fa-file-archive-o" style="font-size:24px"></i><span
                                         class="ps-2 pe-5">Report</span>
                                 </div>
