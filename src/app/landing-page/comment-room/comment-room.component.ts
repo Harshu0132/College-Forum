@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { LikesService } from 'src/app/services/likes.service';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-comment-room',
@@ -27,7 +28,8 @@ export class CommentRoomComponent implements OnInit {
     private domSanitizer: DomSanitizer,
     private authenticationService: AuthenticationService,
     private commentsService: CommentsService,
-    private likesService: LikesService
+    private likesService: LikesService,
+    private reportService: ReportService
   ) {
 
   }
@@ -184,5 +186,24 @@ export class CommentRoomComponent implements OnInit {
     })
   }
 
+  addReport(userName: any) {
+
+    this.authenticationService.getUserNameByUserId(this.userId).subscribe((success: any) => {
+      let obj = {
+        reportBy: success.username,
+        userName: userName,
+        userId: this.userId,
+      }
+      console.log(this.questionId);
+
+      this.reportService.addReport(obj, this.questionId).subscribe((success) => {
+        console.log(success);
+      })
+
+    })
+
+
+
+  }
 
 }

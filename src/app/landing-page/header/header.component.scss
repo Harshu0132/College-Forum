@@ -1,8 +1,3 @@
-.content {
-    // border-bottom: 2px solid #dfdfdf;
-    // background-color: red;
-}
-
 .card {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
@@ -16,4 +11,16 @@
 
 .logo {
     padding-left: 25px;
+}
+
+.dropdown-btn {
+    margin-right: 100px;
+}
+
+.profile {
+    margin-right: 4px;
+}
+
+i:hover {
+    cursor: pointer;
 }

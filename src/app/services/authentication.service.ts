@@ -21,20 +21,24 @@ export class AuthenticationService {
     return this.http.post<any>(url, obj);
   }
 
-  loggedIn(){
+  loggedIn() {
     return !!localStorage.getItem('userAuth')
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('userAuth')
   }
 
-  logOut(){
+  logOut() {
     localStorage.removeItem('userAuth')
   }
-  
-  getUserDetailsByToken(){
+
+  getUserDetailsByToken() {
     let url = `http://localhost:3000/api/sendUserDetails`
+    return this.http.get(url)
+  }
+  getUserNameByUserId(id: number) {
+    let url = `http://localhost:3000/api/getUserNameByUserId/${id}`
     return this.http.get(url)
   }
 

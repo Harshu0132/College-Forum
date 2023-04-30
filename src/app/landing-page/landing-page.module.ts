@@ -19,6 +19,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { CommentRoomComponent } from './comment-room/comment-room.component';
 import { AuthGuard } from '../auth.guard';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReportComponent } from './Reports/report/report.component';
+import { AdminRouteGuard } from '../admin-route.guard';
+
+
 
 
 const routes: Routes = [
@@ -61,6 +66,10 @@ const routes: Routes = [
       {
         path: 'comment-room', component: CommentRoomComponent, canActivate: [AuthGuard]
       },
+      {
+        path: 'report', component: ReportComponent, canActivate: [AdminRouteGuard]
+
+      },
     ]
   },
 
@@ -84,10 +93,11 @@ const routes: Routes = [
     AiAndDsComponent,
     AluminiComponent,
     AddQuestionComponent,
-    CommentRoomComponent
+    CommentRoomComponent,
+    ReportComponent
   ],
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule,
+    CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule,
     RouterModule.forChild(routes)
 
   ]

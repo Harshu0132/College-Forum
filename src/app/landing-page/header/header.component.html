@@ -8,14 +8,20 @@
                 <p class="text-center">Content name</p>
             </div>
             <div class="col-4 my-auto">
-                <div class="text-end d-flex justify-content-end ">
-                    <button class="btn btn-danger" (click)="logout()">log out</button>
-                    <div class="home">
+                <div class="text-end d-flex justify-content-end">
+                    <i class="fa fa-user me-3" style="font-size:25px" ngbDropdown>
+                        <div class="profile" ngbDropdownToggle>
+                            <div class="dropdown-menu " ngbDropdownMenu>
+                                <div ngbDropdownItem class="d-flex align-items-center"><i class="fa fa-user"
+                                        style="font-size:20px"></i><span class="ms-2">Profile</span></div>
+                                <div ngbDropdownItem class="d-flex align-items-center"><i class='fas fa-sign-out-alt' style='font-size:20px'></i><span
+                                        class="ms-2" (click)="logout()">log out</span></div>
+                            </div>
+                        </div>
+                    </i>
+                    <!-- <div class="home">
                         <i class="fa fa-home" style="font-size:36px"></i>
-                    </div>
-                    <div class="profile mx-3">
-                        <i class="fa fa-user" style="font-size:36px"></i>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

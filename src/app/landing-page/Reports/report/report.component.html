@@ -1,0 +1,33 @@
+<div class="content">
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Sr.no</th>
+                    <th scope="col">Report By</th>
+                    <th scope="col">Report on</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of data; let i = index">
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{r.reportBy}}</td>
+                    <td>{{r.userName}}</td>
+                    <td>
+                        <span class="me-3">
+                            <div class="btn btn-sm btn-outline-primary" (click)="view(r.questionId)">View</div>
+                        </span>
+                        <span class="me-3">
+                            <div class="btn btn-sm btn-outline-success" (click)="rejectReport(r.questionId)">Reject
+                            </div>
+                        </span>
+                        <span class="">
+                            <div class="btn btn-sm btn-outline-danger" (click)="blockUserQuestionByQuestionId(r.questionId)">Block</div>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

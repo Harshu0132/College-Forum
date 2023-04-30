@@ -12,14 +12,14 @@
         }
 
         .faculty,
-        .alumini,
+        .alumini,.report
         .departments {
             font-weight: bold;
             padding-top: 10px;
         }
 
         li:hover,
-        .alumini:hover {
+        .alumini:hover, .report:hover {
             cursor: pointer;
             color: #0f3f7f;
         }

@@ -20,6 +20,7 @@
                 <li></li>
               </ul> -->
         </div>
+
         <div>
             <label for="Departments" class="departments">Departments</label>
             <div class="department-content my-3">
@@ -46,6 +47,12 @@
                 </div>
                 <!-- <div disabled="true" routerLink="/landing-page/faculty/administration">Administration</div> -->
             </div>
+        </div>
+        <div *ngIf="this.role == 'admin'">
+            <label for="Deparment" class="report fw-bold" routerLink="/landing-page/report">Report list</label>
+            <!-- <ul>
+                <li></li>
+              </ul> -->
         </div>
     </div>
 </div>

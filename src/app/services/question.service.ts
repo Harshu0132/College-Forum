@@ -35,6 +35,11 @@ export class QuestionService {
     return this.http.get<any>(url);
   }
 
+  blockUserQuestionByQuestionId(id: number) {
+    let url = `http://localhost:3000/api/blockUserQuestionByQuestionId/${id}`
+    return this.http.delete<any>(url);
+  }
+
 }
 
 
