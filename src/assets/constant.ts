@@ -25,5 +25,18 @@ export const constant = {
         // { id: '22', name: '' },
         // { id: '23', name: '' },
     ],
+    department: [
+        { id: '0', name: 'Computer Science & Engineering' },
+        { id: '1', name: 'Electronics' },
+        { id: '2', name: 'Mechanical' },
+        { id: '3', name: 'Civil' },
+        { id: '4', name: 'Artificial Intelligence & Data Science' },
+    ],
+    designation: [
+        { id: '0', name: 'Admin' },
+        { id: '1', name: 'College Faculty' },
+        { id: '2', name: 'Alumini' },
+        { id: '3', name: 'Student' },
+    ]
    
 }

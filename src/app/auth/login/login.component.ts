@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validator, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthenticationService) { }
+  constructor(private router: Router, private authService: AuthenticationService,
+    private toastr: ToastrService,
+  ) { }
 
   get email() {
     return this.loginForm.get('email')
@@ -22,8 +26,8 @@ export class LoginComponent implements OnInit {
 
 
   loginForm = new FormGroup({
-    email: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('',[Validators.required])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   })
 
   ngOnInit(): void {
@@ -34,9 +38,16 @@ export class LoginComponent implements OnInit {
       console.log(success);
       if (success.token) {
         localStorage.setItem('userAuth', success.token)
-
+        this.toastr.success('Login done successfully!!', 'SignIn', {
+          timeOut: 2000,
+        });
         this.router.navigate(['/landing-page/home'])
+
       }
+    }, (err) => {
+      this.toastr.error(`${err.error.msg}`, 'Error', {
+        timeOut: 2000,
+      });
     })
   }
 

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+import { constant } from 'src/assets/constant';
+
 
 
 @Component({
@@ -15,38 +18,84 @@ export class RegisterComponent implements OnInit {
   // profile: any;
   // imageData: any;
 
-  constructor(private router: Router, private AuthService: AuthenticationService) {
+  constructor(private router: Router,
+    private AuthService: AuthenticationService,
+    private toastr: ToastrService,
+  ) {
     console.log(this.imageData);
+
+    this.userForm.patchValue({
+      "firstName": "abc",
+      "middleName": "abc",
+      "lastName": "abc",
+      "contactNo": 9923527956,
+      "city": "abcd",
+      "pinCode": 441111,
+      "designation": "Admin",
+      "department": "Computer Science & Engineering",
+      "dob": "2023-01-01",
+      "gender": "Male",
+      "email": "abc@gmail.com",
+      "username": "abc",
+      "password": "abc",
+      "role": null,
+      "file": null
+    })
 
   }
 
+  Department: any = constant.department
+  Designation: any = constant.designation
 
   userForm = new FormGroup({
     firstName: new FormControl(),
-    middleName: new FormControl(''),
+    middleName: new FormControl(),
     lastName: new FormControl(),
-    contactNo: new FormControl(),
+    contactNo: new FormControl(null, [Validators.required, Validators.min(10)]),
     city: new FormControl(),
     pinCode: new FormControl(),
-    designation: new FormControl(),
-    department: new FormControl(),
+    designation: new FormControl('', Validators.required),
+    department: new FormControl('', Validators.required),
     dob: new FormControl(),
     gender: new FormControl(),
-    email: new FormControl(),
-    username: new FormControl(),
-    password: new FormControl(),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
     role: new FormControl(),
     file: new FormControl(),
 
   })
 
+
+
+  get email() {
+    return this.userForm.get('email')
+  }
+
+  get password() {
+    return this.userForm.get('password')
+  }
+  get contactNo() {
+    return this.userForm.get('contactNo')
+  }
+  get department() {
+    return this.userForm.get('department')
+  }
+  get designation() {
+    return this.userForm.get('designation')
+  }
+  get username() {
+    return this.userForm.get('username')
+  }
+
   ngOnInit(): void {
   }
 
-
-
-
   register() {
+
+    console.log(this.userForm.value);
+
+
     let uf = new FormData()
     uf.append('firstName', this.userForm.value.firstName)
     uf.append('middleName', this.userForm.value.middleName)
@@ -70,22 +119,24 @@ export class RegisterComponent implements OnInit {
       //   timeOut: 3000,
       // });
 
-      alert("Plzz... choose valid file")
+      this.toastr.warning('Please choose valid file !!', 'Validation Error', {
+        timeOut: 2000,
+      });
       return
     }
 
     this.AuthService.register(uf).subscribe((success) => {
       console.log(success);
-      // this.toastr.success('Cafe details added successfully, wait for admins approvement!!', 'Success', {
-      //   timeOut: 2000,
-      // });
-      alert("success")
       if (success) {
-
+        this.toastr.success('User registration done successfully!!', 'Registration', {
+          timeOut: 2000,
+        });
         this.router.navigate(['/landing-page/home'])
       }
     }, (err) => {
-      console.log("err", err);
+      this.toastr.success(`${err.error.msg}`, 'Validation error', {
+        timeOut: 2000,
+      });
 
     })
     this.imageData = null

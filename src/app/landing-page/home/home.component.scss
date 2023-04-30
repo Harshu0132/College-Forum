@@ -1,0 +1,182 @@
+.content {
+    .header {
+        font-size: larger;
+    }
+
+    .section {
+        .add-question {
+            button {
+                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+            }
+        }
+
+        .user-logo {
+            margin-left: 1px;
+
+            //border: 1px solid #ced4da;
+            .box {
+                width: 4rem;
+                height: 4rem;
+                // background-color: red;
+                border-radius: 10rem;
+
+                img{
+                    width: 4rem;
+                    height: 4rem;
+                    object-fit: cover;
+                    object-position:center;
+                    border-radius: 50%;
+                }
+            }
+
+            .comment:hover, .like:hover, .report:hover{
+                cursor: pointer;
+            }
+            .comment, .like, .report{
+                display: flex;
+                align-items: center;
+            }
+           
+        }
+
+    }
+
+}
+
+
+.like {
+    display: flex;
+
+
+    .like-button {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    svg {
+        fill: black;
+        transition: transform 0.2s ease-in-out;
+        transform-origin: center;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+
+
+    }
+
+
+
+    svg:hover {
+        transform: scale(1.2);
+        fill: #f84a9b
+    }
+
+    svg:active {
+        transform: scale(0.8);
+        fill: pink;
+
+    }
+
+    svg.animated {
+        animation: heartBeat 0.5s;
+    }
+
+    @keyframes heartBeat {
+        0% {
+            transform: scale(1);
+        }
+
+        14% {
+            transform: scale(1.3);
+        }
+
+        28% {
+            transform: scale(1);
+        }
+
+        42% {
+            transform: scale(1.3);
+        }
+
+        70% {
+            transform: scale(1);
+        }
+    }
+}
+
+
+.like {
+    display: flex;
+
+
+    .like-button {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    svg {
+        fill: black;
+        transition: transform 0.2s ease-in-out;
+        transform-origin: center;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+
+
+    }
+
+
+
+    svg:hover {
+        transform: scale(1.2);
+        fill: #f84a9b
+    }
+
+    svg:active {
+        transform: scale(0.8);
+        fill: pink;
+
+    }
+
+    svg.animated {
+        animation: heartBeat 0.5s;
+    }
+
+    @keyframes heartBeat {
+        0% {
+            transform: scale(1);
+        }
+
+        14% {
+            transform: scale(1.3);
+        }
+
+        28% {
+            transform: scale(1);
+        }
+
+        42% {
+            transform: scale(1.3);
+        }
+
+        70% {
+            transform: scale(1);
+        }
+    }
+}
