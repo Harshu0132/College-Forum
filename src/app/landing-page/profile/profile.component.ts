@@ -1,47 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { ToastrService } from 'ngx-toastr';
 import { constant } from 'src/assets/constant';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
-  // file: any
-  // profile: any;
-  // imageData: any;
-
-  constructor(private router: Router,
-    private AuthService: AuthenticationService,
+  constructor(private authenticationService: AuthenticationService, private userService: UserService,
     private toastr: ToastrService,
-  ) {
-    // console.log(this.imageData);
+    private domSanitizer: DomSanitizer,
+    private router: Router
+  ) { }
+  userId: any
+  ngOnInit(): void {
+    this.getUserId()
+  }
 
-    // this.userForm.patchValue({
-    //   "firstName": "abc",
-    //   "middleName": "abc",
-    //   "lastName": "abc",
-    //   "contactNo": 9923527956,
-    //   "city": "abcd",
-    //   "pinCode": 441111,
-    //   "designation": "Admin",
-    //   "department": "Computer Science & Engineering",
-    //   "dob": "2023-01-01",
-    //   "gender": "Male",
-    //   "email": "abc@gmail.com",
-    //   "username": "abc",
-    //   "password": "abc",
-    //   "role": null,
-    //   "file": null
-    // })
+  profileUrl: any
+  getUserId() {
+    this.authenticationService.getUserDetailsByToken().subscribe((user: any) => {
+      this.userId = user.id
+      this.userService.getAllUserDetails(this.userId).subscribe((success) => {
+        console.log(success);
 
+        this.profileUrl = this.imageConverter(success.file.data);
+        this.userForm.patchValue(success)
+
+      })
+
+    })
   }
 
   Department: any = constant.department
@@ -65,8 +62,6 @@ export class RegisterComponent implements OnInit {
     file: new FormControl(),
   })
 
-
-
   get email() {
     return this.userForm.get('email')
   }
@@ -87,15 +82,10 @@ export class RegisterComponent implements OnInit {
     return this.userForm.get('username')
   }
 
-  ngOnInit(): void {
-  }
-
-  register() {
-
-    console.log(this.userForm.value);
-
-
+  updateProfile() {
     let uf = new FormData()
+
+    uf.append('id', this.userId)
     uf.append('firstName', this.userForm.value.firstName)
     uf.append('middleName', this.userForm.value.middleName)
     uf.append('lastName', this.userForm.value.lastName)
@@ -110,52 +100,46 @@ export class RegisterComponent implements OnInit {
     uf.append('username', this.userForm.value.username)
     uf.append('password', this.userForm.value.password)
     uf.append('role', 'user')
-
-    console.log(uf);
-    
     if (this.image) {
       uf.append('file', this.image)
-    } else {
-      this.toastr.warning('Please choose valid file !!', 'Validation Error', {
-        timeOut: 2000,
-      });
-      return
     }
 
-    this.AuthService.register(uf).subscribe((success) => {
-      // console.log(success);
+    this.userService.updateUser(uf, this.userId).subscribe((success) => {
       if (success) {
-        this.toastr.success('User registration done successfully!!', 'Registration', {
-          timeOut: 2000,
+        this.toastr.success('User updated', 'Success', {
+          timeOut: 3000,
         });
-        this.router.navigate(['/landing-page/home'])
+        this.router.navigate(['/landing-page/profile']);
       }
-    }, (err) => {
-      this.toastr.success(`${err.error.msg}`, 'Validation error', {
-        timeOut: 2000,
-      });
-
     })
-    this.imageData = null
 
 
+    // if (this.image) {
+    //   uf.append('file', this.image)
+    // } else {
+    //   // this.toastr.error('Plz.. select image', 'Error', {
+    //   //   timeOut: 3000,
+    //   // });
+
+    //   this.toastr.warning('Please choose valid file !!', 'Validation Error', {
+    //     timeOut: 2000,
+    //   });
+    //   return
+    // }
   }
-
 
   file: any
   profile: any;
   imageData: any;
-
   image: any
   chosen: any
   onSelectFile(e: any) {
+    this.profileUrl = ''
     if (e.target.value) {
       this.image = e.target.files[0];
       this.chosen = true
     }
-
     const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"]
-
     if (this.image && allowedMimeTypes.includes(this.image.type)) {
       let reader = new FileReader()
       reader.onload = () => {
@@ -163,7 +147,18 @@ export class RegisterComponent implements OnInit {
       }
       reader.readAsDataURL(this.image);
     }
+  }
 
+
+  imageConverter(img: any) {
+    let TYPED_ARRAY = new Uint8Array(img);
+    const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
+      return data + String.fromCharCode(byte);
+    }, '')
+
+    let base64String = btoa(STRING_CHAR);
+    const imageurl = this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpeg;base64, ' + base64String);
+    return imageurl;
   }
 
 

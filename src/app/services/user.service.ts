@@ -15,6 +15,17 @@ export class UserService {
     return this.http.post<any>(url, obj);
   }
 
+  getAllUserDetails(id: any) {
+    let url = `http://localhost:3000/api/getAllUserDetails/${id}`
+    return this.http.get<any>(url);
+  }
+  updateUser(obj: any, id : any) {
+    console.log(id);
+    
+    let url = `http://localhost:3000/api/updateUser/${id}`
+    return this.http.put<any>(url,obj);
+  }
+
 }
 
 

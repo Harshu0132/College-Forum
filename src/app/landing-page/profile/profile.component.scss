@@ -1,0 +1,59 @@
+.content {
+    .header {
+        font-size: larger;
+    }
+
+    .section {
+        .card {
+
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+            // button {
+            //     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+            // }
+
+        }
+
+        .box {
+            margin-top: 25px;
+            width: 260px;
+            height: 260px;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+
+            img {
+                width: 260px;
+                height: 260px;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+
+
+    }
+
+}
+
+
+.form-control.ng-touched.ng-invalid {
+    border: 1px solid red;
+}
+
+.form-control.ng-touched.ng-valid {
+    border: 1px solid green;
+}
+
+label {
+    font-weight: bold;
+
+}
+
+input,
+select {
+    background-color: #f3f3f4;
+    font-size: 13px;
+    height: 32px;
+    padding: 5px;
+    width: 270px;
+}

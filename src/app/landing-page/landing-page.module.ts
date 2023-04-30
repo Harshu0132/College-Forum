@@ -24,6 +24,7 @@ import { ReportComponent } from './Reports/report/report.component';
 import { AdminRouteGuard } from '../admin-route.guard';
 import { ToastComponent } from './toast/toast.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -72,6 +73,9 @@ const routes: Routes = [
         path: 'report', component: ReportComponent, canActivate: [AdminRouteGuard]
 
       },
+      {
+        path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
+      },
     ]
   },
 
@@ -97,7 +101,8 @@ const routes: Routes = [
     AddQuestionComponent,
     CommentRoomComponent,
     ReportComponent,
-    ToastComponent
+    ToastComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule,

@@ -106,7 +106,7 @@ export class AddQuestionComponent implements OnInit {
       // });
       // alert("success")
       if (success) {
-        this.toastr.success('Question Posted Successfully !', 'Success', {
+        this.toastr.success('Question Posted Successfully !!', 'Success', {
           timeOut: 2000,
         });
         if(this.department == "Computer Science & Engineering"){
