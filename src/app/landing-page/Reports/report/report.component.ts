@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReportService } from 'src/app/services/report.service';
 import { QuestionService } from 'src/app/services/question.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-report',
@@ -12,7 +13,9 @@ export class ReportComponent implements OnInit {
 
   constructor(private reportService: ReportService,
     private router: Router,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private toastr: ToastrService,
+
   ) { }
   data: any
   ngOnInit(): void {
@@ -31,6 +34,9 @@ export class ReportComponent implements OnInit {
     this.reportService.rejectReportByAdmin(id).subscribe((success) => {
       // console.log(success);
       if (success) {
+        this.toastr.warning('Report has been rejected !!', 'Rejection', {
+          timeOut: 2000,
+        });
         this.getAllReportData()
       }
 
@@ -42,12 +48,16 @@ export class ReportComponent implements OnInit {
       this.data = success
       // console.log(this.data);
 
+
     })
   }
 
   blockUserQuestionByQuestionId(id: number) {
     this.questionService.blockUserQuestionByQuestionId(id).subscribe((success) => {
-      console.log(success);
+      // console.log(success);
+      this.toastr.error('User question has been blocked !!', 'Blocked', {
+        timeOut: 2000,
+      });
       this.getAllReportData()
     })
   }

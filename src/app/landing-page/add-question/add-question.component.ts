@@ -4,6 +4,8 @@ import { constant } from 'src/assets/constant'
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-add-question',
@@ -14,7 +16,10 @@ export class AddQuestionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
     private authenticationService: AuthenticationService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService,
+
+    ) {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.department = params.department
 
@@ -101,6 +106,9 @@ export class AddQuestionComponent implements OnInit {
       // });
       // alert("success")
       if (success) {
+        this.toastr.success('Question Posted Successfully !', 'Success', {
+          timeOut: 2000,
+        });
         if(this.department == "Computer Science & Engineering"){
           this.router.navigate(['/landing-page/departments/cse'])
         }

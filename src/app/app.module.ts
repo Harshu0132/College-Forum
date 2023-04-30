@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 const routes: Routes = [
@@ -35,7 +38,12 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule, HttpClientModule,
-    RouterModule.forRoot(routes), FormsModule
+    RouterModule.forRoot(routes), FormsModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot()
+
+
+
   ],
   providers: [
     AuthGuard,{

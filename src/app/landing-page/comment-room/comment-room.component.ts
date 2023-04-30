@@ -7,6 +7,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CommentsService } from 'src/app/services/comments.service';
 import { LikesService } from 'src/app/services/likes.service';
 import { ReportService } from 'src/app/services/report.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-comment-room',
@@ -29,7 +31,9 @@ export class CommentRoomComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private commentsService: CommentsService,
     private likesService: LikesService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private toastr: ToastrService,
+
   ) {
 
   }
@@ -93,7 +97,9 @@ export class CommentRoomComponent implements OnInit {
       // console.log(success);
       if (success) {
         this.questionService.commentCounter(this.questionId).subscribe((success) => {
-          // console.log(success);
+          this.toastr.success('Comment done !!', 'Success', {
+            timeOut: 2000,
+          });
         })
       }
       this.getAllComments()
@@ -197,7 +203,17 @@ export class CommentRoomComponent implements OnInit {
       console.log(this.questionId);
 
       this.reportService.addReport(obj, this.questionId).subscribe((success) => {
-        console.log(success);
+        console.log(success.msg);
+
+        if (success.msg) {
+          this.toastr.success('You have successfully reported to this user !!', 'Success', {
+            timeOut: 2000,
+          });
+        } else {
+          this.toastr.warning('You have already reported to this user !!', 'Warning', {
+            timeOut: 2000,
+          });
+        }
       })
 
     })

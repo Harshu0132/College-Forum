@@ -22,6 +22,8 @@ import { AuthGuard } from '../auth.guard';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReportComponent } from './Reports/report/report.component';
 import { AdminRouteGuard } from '../admin-route.guard';
+import { ToastComponent } from './toast/toast.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -94,11 +96,14 @@ const routes: Routes = [
     AluminiComponent,
     AddQuestionComponent,
     CommentRoomComponent,
-    ReportComponent
+    ReportComponent,
+    ToastComponent
   ],
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule, NgbDropdownModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ToastrModule,
+
 
   ]
 })

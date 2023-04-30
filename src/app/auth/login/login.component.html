@@ -17,15 +17,23 @@
                         <div>
                             <label for="email">Email</label>
                             <input type="email" placeholder="Email" formControlName="email" class="form-control">
+                            <small class="text-danger" *ngIf="email && email.invalid && email.touched">Please enter
+                                valid email</small>
+
                         </div>
 
                         <div class="py-3">
                             <label for="password">Password</label>
-                            <input type="password" placeholder="6+ characters" formControlName="password" class="form-control">
+                            <input type="password" placeholder="6+ characters" formControlName="password"
+                                class="form-control">
+                            <small class="text-danger" *ngIf="password && password.invalid && password.touched">Password
+                                is required</small>
+
                         </div>
 
                         <div>
-                            <button class="btn login-btn px-5 py-1" (click)="signIn()">Login</button>
+                            <button class="btn login-btn px-5 py-1" (click)="signIn()"
+                                [disabled]="loginForm.invalid">Login</button>
                         </div>
                         <div class="my-4">
                             <div>
