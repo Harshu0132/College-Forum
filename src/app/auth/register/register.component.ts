@@ -24,23 +24,23 @@ export class RegisterComponent implements OnInit {
   ) {
     // console.log(this.imageData);
 
-    this.userForm.patchValue({
-      "firstName": "abc",
-      "middleName": "abc",
-      "lastName": "abc",
-      "contactNo": 9923527956,
-      "city": "abcd",
-      "pinCode": 441111,
-      "designation": "Admin",
-      "department": "Computer Science & Engineering",
-      "dob": "2023-01-01",
-      "gender": "Male",
-      "email": "abc@gmail.com",
-      "username": "abc",
-      "password": "abc",
-      "role": null,
-      "file": null
-    })
+    // this.userForm.patchValue({
+    //   "firstName": "abc",
+    //   "middleName": "abc",
+    //   "lastName": "abc",
+    //   "contactNo": 9923527956,
+    //   "city": "abcd",
+    //   "pinCode": 441111,
+    //   "designation": "Admin",
+    //   "department": "Computer Science & Engineering",
+    //   "dob": "2023-01-01",
+    //   "gender": "Male",
+    //   "email": "abc@gmail.com",
+    //   "username": "abc",
+    //   "password": "abc",
+    //   "role": null,
+    //   "file": null
+    // })
 
   }
 
