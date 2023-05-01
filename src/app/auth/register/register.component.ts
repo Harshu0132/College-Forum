@@ -116,10 +116,10 @@ export class RegisterComponent implements OnInit {
     if (this.image) {
       uf.append('file', this.image)
     } else {
-      this.toastr.warning('Please choose valid file !!', 'Validation Error', {
-        timeOut: 2000,
-      });
-      return
+      // this.toastr.warning('Please choose valid file !!', 'Validation Error', {
+      //   timeOut: 2000,
+      // });
+      // return
     }
 
     this.AuthService.register(uf).subscribe((success) => {
