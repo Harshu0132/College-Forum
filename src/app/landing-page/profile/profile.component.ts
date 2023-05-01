@@ -33,7 +33,8 @@ export class ProfileComponent implements OnInit {
       this.userService.getAllUserDetails(this.userId).subscribe((success) => {
         console.log(success);
 
-        this.profileUrl = this.imageConverter(success.file.data);
+        this.profileUrl = this.imageConverter(success.file?.data);
+
         this.userForm.patchValue(success)
 
       })
