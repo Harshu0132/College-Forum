@@ -61,7 +61,7 @@ export class AddQuestionComponent implements OnInit {
       let reader = new FileReader()
       reader.onload = () => {
         this.imageData = reader.result
-        console.log(this.imageData);
+        // console.log(this.imageData);
 
       }
       reader.readAsDataURL(this.image);

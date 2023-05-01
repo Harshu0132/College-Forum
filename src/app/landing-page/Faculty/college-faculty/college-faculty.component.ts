@@ -20,7 +20,7 @@ export class CollegeFacultyComponent implements OnInit {
     }
     this.userService.getDetailsByDesignation(obj).subscribe((success) => {
       this.data = success.map((s: any) => {
-        const profileUrl = this.imageConverter(s.file.data)
+        const profileUrl = this.imageConverter(s.file?.data)
         return { profileUrl: profileUrl, firstName: s.firstName, designation: s.designation }
       })
 
