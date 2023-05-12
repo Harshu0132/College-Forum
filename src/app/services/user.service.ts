@@ -19,13 +19,16 @@ export class UserService {
     let url = `http://localhost:3000/api/getAllUserDetails/${id}`
     return this.http.get<any>(url);
   }
-  updateUser(obj: any, id : any) {
-    console.log(id);
-    
+  updateUser(obj: any, id: any) {
+    // console.log(id);
     let url = `http://localhost:3000/api/updateUser/${id}`
-    return this.http.put<any>(url,obj);
+    return this.http.put<any>(url, obj);
   }
 
+  getAllUser() {
+    let url = `http://localhost:3000/api/getAllUser`
+    return this.http.get<any>(url);
+  }
 }
 
 

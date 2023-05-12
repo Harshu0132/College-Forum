@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       this.arr = success.map((s: any) => {
 
         const imageurl = this.imageConverter(s.attachment?.data);
-        const profileUrl = this.imageConverter(s.user.file.data);
+        const profileUrl = this.imageConverter(s.user.file?.data);
         const data = { imageUrl: imageurl, profileUrl: profileUrl, userName: s.user.userName, id: s.id, subject: s.subject, questionBody: s.questionBody, department: s.department, }
         console.log(data);
 

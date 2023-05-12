@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CivilService } from 'src/app/services/departments/civil.service';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-civil',
@@ -19,7 +21,9 @@ export class CivilComponent implements OnInit {
   constructor(private router: Router,
     private civilService: CivilService,
     private domSanitizer: DomSanitizer,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private questionSer: QuestionService,
+    private toastr: ToastrService,
   ) {
     this.getAllQuestionDetails()
     this.getUserId()
@@ -63,7 +67,7 @@ export class CivilComponent implements OnInit {
 
         console.log(like);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
-        const profileUrl = this.imageConverter(s['data'].user.file.data);
+        const profileUrl = this.imageConverter(s['data'].user.file?.data);
         const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, isLiked: like }
         console.log(data);
 
@@ -109,10 +113,22 @@ export class CivilComponent implements OnInit {
   getUserId() {
     this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
       this.userId = success.id
+      this.role = success.role.toLowerCase()
       console.log(this.userId);
 
       this.getAllQuestionDetails()
 
+    })
+  }
+
+  role: any
+  deleteQuestionByAdminById(id: any) {
+    this.questionSer.deleteQuestionByQuestionId(id).subscribe((success: any) => {
+      let msg = success.msg
+      this.toastr.warning(msg + '!!', 'Delete', {
+        timeOut: 2000,
+      });
+      this.getUserId()
     })
   }
 }

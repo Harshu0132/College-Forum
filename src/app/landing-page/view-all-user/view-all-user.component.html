@@ -1,0 +1,26 @@
+<div class="content">
+    <div class="header text-center pt-3 pb-4 fw-bold">
+        View All User
+    </div>
+    <div class="section mx-5">
+        
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sr no.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Designation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of data; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{u.username}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.designation}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

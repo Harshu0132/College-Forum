@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MechanicalService } from 'src/app/services/departments/mechanical.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { ToastrService } from 'ngx-toastr';
+import { QuestionService } from 'src/app/services/question.service';
 
 
 @Component({
@@ -20,7 +22,9 @@ export class MechanicalComponent implements OnInit {
   constructor(private router: Router,
     private mechanicalService: MechanicalService,
     private domSanitizer: DomSanitizer,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private questionSer: QuestionService,
+    private toastr: ToastrService,
     ) {
     this.getAllQuestionDetails()
     this.getUserId()
@@ -31,6 +35,7 @@ export class MechanicalComponent implements OnInit {
   getUserId() {
     this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
       this.userId = success.id
+      this.role = success.role.toLowerCase()
       console.log(this.userId);
 
       this.getAllQuestionDetails()
@@ -75,7 +80,7 @@ export class MechanicalComponent implements OnInit {
 
         console.log(like);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
-        const profileUrl = this.imageConverter(s['data'].user.file.data);
+        const profileUrl = this.imageConverter(s['data'].user.file?.data);
         const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, isLiked: like}
         console.log(data);
 
@@ -114,5 +119,16 @@ export class MechanicalComponent implements OnInit {
     if (this.isLiked) {
       console.log(this.isLiked);
     }
+  }
+
+  role: any
+  deleteQuestionByAdminById(id: any) {
+    this.questionSer.deleteQuestionByQuestionId(id).subscribe((success: any) => {
+      let msg = success.msg
+      this.toastr.warning(msg + '!!', 'Delete', {
+        timeOut: 2000,
+      });
+      this.getUserId()
+    })
   }
 }

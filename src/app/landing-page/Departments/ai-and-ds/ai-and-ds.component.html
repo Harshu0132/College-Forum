@@ -24,7 +24,10 @@
                     </div>
                 </div>
                 <div class="col-lg-10 pt-4">
-                    <p class="fw-bold p-0 m-0">{{q.userName}}<br></p>
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold p-0 m-0">{{q.userName}}<br></span>
+                        <button class="btn btn-danger" *ngIf="this.role == 'admin'" (click)="deleteQuestionByAdminById(q.id)" >Delete Question<br></button>
+                    </div>
                     <p>{{q.subject}}</p>
                     <p>{{q.questionBody}}</p>
 

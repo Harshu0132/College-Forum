@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CseService } from 'src/app/services/departments/cse.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { QuestionService } from 'src/app/services/question.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,7 +22,10 @@ export class ComputerScienceComponent implements OnInit {
   constructor(private router: Router,
     private cseService: CseService,
     private domSanitizer: DomSanitizer,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private questionSer: QuestionService,
+    private toastr: ToastrService,
+
   ) {
     this.getUserId()
   }
@@ -48,9 +53,6 @@ export class ComputerScienceComponent implements OnInit {
       department: "Computer Science & Engineering"
     }
     this.cseService.getAllCseDetails(obj, this.userId).subscribe(success => {
-      // console.log(success);
-
-
       this.arr = success.map((s: any) => {
 
         const like = s['data'].likes.reduce((acc: any, l: any) => {
@@ -60,17 +62,15 @@ export class ComputerScienceComponent implements OnInit {
           return acc;
         }, false);
 
-        console.log(like);
+        // console.log(like);
         const imageurl = this.imageConverter(s['data']?.attachment?.data);
-        const profileUrl = this.imageConverter(s['data'].user.file.data);
+        const profileUrl = this.imageConverter(s['data'].user.file?.data);
         const data = { imageUrl: imageurl, profileUrl: profileUrl, commentCounter: s['data'].commentCounter, likeCounter: s['data'].likeCounter, userName: s['data'].user.userName, id: s['data'].id, subject: s['data'].subject, questionBody: s['data'].questionBody, department: s['data'].department, isLiked: like }
         console.log(data);
 
         return data;
       })
 
-
-      // console.log(this.arr);
 
     })
   }
@@ -99,19 +99,28 @@ export class ComputerScienceComponent implements OnInit {
 
   onLikeClick() {
     this.isLiked = !this.isLiked;
-
-    if (this.isLiked) {
-      console.log(this.isLiked);
-    }
   }
+
   userId: any
+  role: any
   getUserId() {
     this.authenticationService.getUserDetailsByToken().subscribe((success: any) => {
       this.userId = success.id
-      console.log(this.userId);
+      this.role = success.role.toLowerCase()
+      console.log(this.role);
 
       this.getAllQuestionDetails()
 
+    })
+  }
+
+  deleteQuestionByAdminById(id: any) {
+    this.questionSer.deleteQuestionByQuestionId(id).subscribe((success: any) => {
+      let msg = success.msg
+      this.toastr.warning(msg + '!!', 'Delete', {
+        timeOut: 2000,
+      });
+      this.getUserId()
     })
   }
 
