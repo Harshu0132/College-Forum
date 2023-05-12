@@ -16,7 +16,7 @@ export class AdministrationComponent implements OnInit {
   data: any
   ngOnInit(): void {
     let obj = {
-      designation: 'Admin'
+      designation: 'Administration'
     }
     this.userService.getDetailsByDesignation(obj).subscribe((success) => {
       this.data = success.map((s: any) => {

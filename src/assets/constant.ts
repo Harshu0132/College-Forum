@@ -33,7 +33,7 @@ export const constant = {
         { id: '4', name: 'Artificial Intelligence & Data Science' },
     ],
     designation: [
-        { id: '0', name: 'Admin' },
+        { id: '0', name: 'Administration' },
         { id: '1', name: 'College Faculty' },
         { id: '2', name: 'Alumini' },
         { id: '3', name: 'Student' },
