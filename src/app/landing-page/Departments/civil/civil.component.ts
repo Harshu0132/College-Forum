@@ -131,4 +131,37 @@ export class CivilComponent implements OnInit {
       this.getUserId()
     })
   }
+
+  // Share on WhatsApp
+  shareOnWhatsApp(question: any) {
+    const text = `${this.text}`;
+    console.log(this.text);
+
+    const url = ''; // Set the URL you want to share
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+    window.open(whatsappUrl, '_blank');
+  }
+
+  // Share on Telegram
+  shareOnTelegram(question: any) {
+    const text = `${this.text}`;
+    const url = ''; // Set the URL you want to share
+    const telegramUrl = `https://t.me/share/url?url=${url}&text=${text}`;
+    window.open(telegramUrl, '_blank');
+  }
+
+  shareOnTwitter(question: any) {
+    const text = encodeURIComponent(`${this.text}`);
+    const hashtags = ''; // Add your desired hashtags
+    const imageUrl = encodeURIComponent(question.imageUrl); // Encode the image URL
+    console.log(imageUrl);
+
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=&media=${imageUrl}`;
+    window.open(twitterUrl, '_blank');
+  }
+  text: any
+
+  addQuestionToBody(question: any) {
+    this.text = question.questionBody
+  }
 }
